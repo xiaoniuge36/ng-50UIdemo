@@ -1,0 +1,38 @@
+* {
+    /* 设置为怪异盒模型，盒子的长度宽度只包含content+padding+border */
+    /* 标准盒模型 盒子测长宽只包含content */
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(64, 146, 193);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    /* 换行 */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.btn{
+    background-color:rgb(9, 157, 243);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 1.5rem 3rem;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    margin: 1rem;
+}
+
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn:focus{
+    outline: none;
+}
