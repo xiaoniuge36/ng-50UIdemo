@@ -1,48 +1,48 @@
-const smallCups = document.querySelectorAll('.cup-small')
-const liters = document.getElementById('liters')
-const percentage = document.getElementById('percentage')
-const remained = document.getElementById('remained')
-// 初始化
-updateBigCup()
+const smallCups = document.querySelectorAll('.cup-small') // 小杯子
+const listers = document.getElementById('liters') // 剩余的升数
+const percentage = document.getElementById('percentage') // 百分比
+const remained = document.getElementById('remained') // 剩余的升数
 
-smallCups.forEach((cup, idx) => { // 给每个小杯子绑定事件
-    cup.addEventListener('click', () => highlightCups(idx)) // 点击小杯子时触发事件
+updateBigCup() // 初始化
+
+smallCups.forEach((cup, idx) => { // 给每个杯子绑定事件
+    cup.addEventListener('click', () => highlightCups(idx)) // 点击事件
 })
-// 小杯子高亮
-function highlightCups(idx) { // 高亮小杯子
-    if (idx===7 && smallCups[idx].classList.contains("full")) idx--; // 如果是最后一个杯子，并且是满的，则减一
-    else if(smallCups[idx].classList.contains('full') && !smallCups[idx].nextElementSibling.classList.contains('full')) { // 如果是满的，且下一个杯子不是满的，则减一
-        idx--// 如果是满的，且下一个杯子不是满的，则减一
+
+function highlightCups(idx) { // 高亮杯子
+    if(smallCups[idx].classList.contains('full') && !smallCups[idx].nextElementSibling.classList.contains('full')) { // 如果是满的杯子，且下一个杯子没有满的，则不能点击 
+        idx-- // 回退一个
     }
-    smallCups.forEach((cup, idx2) => {// 将所有杯子变为不高亮
-        if(idx2 <= idx) {// 如果是当前杯子或者当前杯子的下一个杯子，则高亮
+
+    smallCups.forEach((cup, idx2) => { // 高亮所有杯子
+        if(idx2 <= idx) { // 如果是点击的杯子之前的杯子，则高亮
             cup.classList.add('full') // 高亮
-        } else {
-            cup.classList.remove('full') // 取消高亮
+        } else { // 否则，不高亮
+            cup.classList.remove('full') // 不高亮
         }
     })
-// 更新大杯子
-    updateBigCup()
-}
-// 更新大杯子
-function updateBigCup() { // 更新大杯子
-    const fullCups = document.querySelectorAll('.cup-small.full').length // 获取满的杯子数量
-    const totalCups = smallCups.length // 获取总杯子数量
 
-    if(fullCups === 0) { // 如果没有满的杯子，则大杯子为空
+    updateBigCup()   // 更新大杯子
+}
+
+function updateBigCup() { // 更新大杯子
+    const fullCups = document.querySelectorAll('.cup-small.full').length // 满的杯子数量
+    const totalCups = smallCups.length // 总杯子数量
+
+    if(fullCups === 0) { // 如果没有满的杯子，则大杯子没有满的
         percentage.style.visibility = 'hidden' // 隐藏百分比
         percentage.style.height = 0 // 高度为0
     } else {
         percentage.style.visibility = 'visible' // 显示百分比
-        percentage.style.height = `${fullCups / totalCups * 330}px` // 更新百分比高度
-        percentage.innerText = `${fullCups / totalCups * 100}%` // 更新百分比文本
+        percentage.style.height = `${fullCups / totalCups * 330}px` // 高度为满的杯子数量 / 总杯子数量 * 330px
+        percentage.innerText = `${fullCups / totalCups * 100}%` // 百分比为满的杯子数量 / 总杯子数量 * 100%
     }
 
-    if(fullCups === totalCups) { // 如果满的杯子数量等于总杯子数量，则大杯子为满的
-        remained.style.visibility = 'hidden' // 隐藏剩余水量
+    if(fullCups === totalCups) { // 如果满的杯子数量等于总杯子数量，则大杯子满的
+        remained.style.visibility = 'hidden' // 隐藏剩余的升数
         remained.style.height = 0 // 高度为0
-    } else {
-        remained.style.visibility = 'visible' // 显示剩余水量
-        liters.innerText = `${2 - (250 * fullCups / 1000)}L` // 更新剩余水量文本
+    } else {  
+        remained.style.visibility = 'visible' // 显示剩余的升数 
+        listers.innerText = `${2 - (250 * fullCups / 1000)}L` 
     }
 }
