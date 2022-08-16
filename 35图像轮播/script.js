@@ -3,7 +3,7 @@ const leftBtn = document.getElementById('left') // 左按钮
 const rightBtn = document.getElementById('right') // 右按钮
 
 const img = document.querySelectorAll('#imgs img') // 图片数组
-
+console.log(img);
 let idx = 0 // 图片索引
 
 let interval = setInterval(run, 2000) // 定时器
